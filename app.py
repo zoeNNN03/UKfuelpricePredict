@@ -156,7 +156,7 @@ st.write("Click on picture to contact")
 col1, col2, col3 = st.columns(3)
 with col2:
     st.markdown("<h5 style='text-align: center; color: white;'><a href='https://linevoom.line.me/user/_df9Wsf6wdB5k1e4x6Bb5A7HYskbbV0hRri9f77M?utm_medium=windows&utm_source=desktop&utm_campaign=Profile'><img src='https://profile.line-scdn.net/0hncBE0TKrMUxvPBiT905PMx9sMiZMTWheQVIpeFpubC9QWSFKQlopfVk0aCxXCyIbRwh7eFg_a3hjL0YqcWrNeGgMb35XDHUbS1J6qw/preview' style='width:200px;height:200px;'></a></h5>", unsafe_allow_html=True)
-    st.markdown("<h6 style='text-align: center; color: white;'>อาจารย์ที่ปรึกษา<br>ผู้ช่วยศาสตราจารย์ ดร.สุภาวดี ศรีคําดี</h6>", unsafe_allow_html=True)
+    st.markdown("<h6 style='text-align: center; color: white;'>อาจารย์ที่ปรึกษา<br>ดร.สุภาวดี ศรีคําดี</h6>", unsafe_allow_html=True)
 
 col1, col2, col3 = st.columns(3)
 with col1:
