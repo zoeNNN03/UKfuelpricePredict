@@ -65,8 +65,13 @@ else:
 
 if st.button(label='SUBMIT'):
     st.subheader(f'{choose} ราคาประมาณ {predict(price, duty, vat, choose, x_predict)}')
+else:
+    st.subheader(f'Enter all information, press SUBMIT')
 
-    #ความน่าเชื้อถือของข้อมูล
+#ความน่าเชื้อถือของข้อมูล
+st.header("Model credibility")  
+if choose == 'Ultra-low-sulfur Petrol':
+    predict(100, 100, 100, 'Ultra-low-sulfur Petrol', 'Ultra-low-sulfur Diesel') 
     MAE = mt.mean_absolute_error(data3[choose], data3['Predict'])
     MSE = mt.mean_squared_error(data3[choose], data3['Predict'])
     RMSE = m.sqrt(MSE)
@@ -78,7 +83,7 @@ if st.button(label='SUBMIT'):
         x = data_test[x_predict],
         y = data_test[choose],
         mode = 'markers',
-        name = 'Data test')
+        name = 'data 20percent of actual data')
 
     line = go.Scatter(
         x = data_test[x_predict],
@@ -93,14 +98,44 @@ if st.button(label='SUBMIT'):
         )
     grah = [scat, line]
     layout = go.Layout(title = 'Reliability of model',
-                        xaxis = dict(title='x'),
-                        yaxis = dict(title='y'))           
+                            xaxis = dict(title='x'),
+                            yaxis = dict(title='y'))           
     fig = go.Figure(data=grah, layout=layout)
     st.plotly_chart(fig, use_container_width=True)
 
 else:
-    st.subheader(f'Enter all information, press SUBMIT')
+    predict(100, 100, 100, 'Ultra-low-sulfur Diesel', 'Ultra-low-sulfur Petrol') 
+    MAE = mt.mean_absolute_error(data3[choose], data3['Predict'])
+    MSE = mt.mean_squared_error(data3[choose], data3['Predict'])
+    RMSE = m.sqrt(MSE)
+    r2 = mt.r2_score(data3[choose], data3['Predict'])
+    st.write(f'MAE = {MAE : .3f} | MSE = {MSE : .3f} | RMSE = {RMSE : .3f} | r2 = {r2 : .3f}')
 
+    pred_y = regr.predict(data_test[[ x_predict, 'Duty rate', 'VAT']])
+    scat = go.Scatter(
+        x = data_test[x_predict],
+        y = data_test[choose],
+        mode = 'markers',
+        name = 'data 20percent of actual data')
+
+    line = go.Scatter(
+        x = data_test[x_predict],
+        y = pred_y,
+        name = 'Predict data', 
+        marker = dict(
+            color = "Red"
+            ),
+        mode = 'lines',
+        fill = 'tonexty',
+        fillcolor = 'rgba(167, 167, 167, 0.12)',
+        )
+    grah = [scat, line]
+    layout = go.Layout(title = 'Reliability of model',
+                            xaxis = dict(title='x'),
+                            yaxis = dict(title='y'))           
+    fig = go.Figure(data=grah, layout=layout)
+    st.plotly_chart(fig, use_container_width=True)
+    
 #กราฟ
 st.header("Select to display information")
 grah = data.copy()
